@@ -10,7 +10,8 @@ var mkdirp = require('mkdirp');
 var _default = {
   comments: true,
   output: '',
-  each: false
+  each: false,
+  postfix: '.min'
 };
 
 module.exports = function(dirPath, options) {
@@ -31,8 +32,11 @@ module.exports = function(dirPath, options) {
       if ( ! isValidOutput(opt.output)) {
         opt.output = '_out_';
       }
+
+      var postfix = opt.postfix ? opt.postfix : '';
+
       newName = path.join(opt.output,
-        path.dirname(v), path.basename(v, path.extname(v))) + '.min.js';
+        path.dirname(v), path.basename(v, path.extname(v))) + postfix + '.js';
 
       mkdirp.sync(path.dirname(newName));
 
